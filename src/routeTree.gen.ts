@@ -11,8 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
 import { Route as CollegesSlugRouteImport } from './routes/colleges.$slug'
+import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
+import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionRoute = AdmissionRouteImport.update({
+  id: '/admission',
+  path: '/admission',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CollegesIndexRoute = CollegesIndexRouteImport.update({
@@ -34,39 +42,83 @@ const CollegesSlugRoute = CollegesSlugRouteImport.update({
   path: '/colleges/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
+  id: '/programs/',
+  path: '/programs/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgramsSlugRoute = ProgramsSlugRouteImport.update({
+  id: '/programs/$slug',
+  path: '/programs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admission': typeof AdmissionRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges/': typeof CollegesIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admission': typeof AdmissionRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges': typeof CollegesIndexRoute
+  '/programs': typeof ProgramsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admission': typeof AdmissionRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges/': typeof CollegesIndexRoute
+  '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/colleges/$slug' | '/colleges/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/admission'
+    | '/colleges/$slug'
+    | '/programs/$slug'
+    | '/colleges/'
+    | '/programs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/colleges/$slug' | '/colleges'
-  id: '__root__' | '/' | '/about' | '/colleges/$slug' | '/colleges/'
+  to:
+    | '/'
+    | '/about'
+    | '/admission'
+    | '/colleges/$slug'
+    | '/programs/$slug'
+    | '/colleges'
+    | '/programs'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/admission'
+    | '/colleges/$slug'
+    | '/programs/$slug'
+    | '/colleges/'
+    | '/programs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdmissionRoute: typeof AdmissionRoute
   CollegesSlugRoute: typeof CollegesSlugRoute
+  ProgramsSlugRoute: typeof ProgramsSlugRoute
   CollegesIndexRoute: typeof CollegesIndexRoute
+  ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -85,6 +137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admission': {
+      id: '/admission'
+      path: '/admission'
+      fullPath: '/admission'
+      preLoaderRoute: typeof AdmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/colleges/': {
       id: '/colleges/'
       path: '/colleges'
@@ -99,14 +158,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollegesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/programs/': {
+      id: '/programs/'
+      path: '/programs'
+      fullPath: '/programs/'
+      preLoaderRoute: typeof ProgramsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programs/$slug': {
+      id: '/programs/$slug'
+      path: '/programs/$slug'
+      fullPath: '/programs/$slug'
+      preLoaderRoute: typeof ProgramsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdmissionRoute: AdmissionRoute,
   CollegesSlugRoute: CollegesSlugRoute,
+  ProgramsSlugRoute: ProgramsSlugRoute,
   CollegesIndexRoute: CollegesIndexRoute,
+  ProgramsIndexRoute: ProgramsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
