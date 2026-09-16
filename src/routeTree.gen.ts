@@ -12,8 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdmissionRouteImport } from './routes/admission'
+import { Route as ResearchRouteImport } from './routes/research'
+import { Route as StudentLifeRouteImport } from './routes/student-life'
 import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
 import { Route as CollegesSlugRouteImport } from './routes/colleges.$slug'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsSlugRouteImport } from './routes/news.$slug'
 import { Route as ProgramsIndexRouteImport } from './routes/programs.index'
 import { Route as ProgramsSlugRouteImport } from './routes/programs.$slug'
 
@@ -32,6 +36,16 @@ const AdmissionRoute = AdmissionRouteImport.update({
   path: '/admission',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResearchRoute = ResearchRouteImport.update({
+  id: '/research',
+  path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudentLifeRoute = StudentLifeRouteImport.update({
+  id: '/student-life',
+  path: '/student-life',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollegesIndexRoute = CollegesIndexRouteImport.update({
   id: '/colleges/',
   path: '/colleges/',
@@ -40,6 +54,16 @@ const CollegesIndexRoute = CollegesIndexRouteImport.update({
 const CollegesSlugRoute = CollegesSlugRouteImport.update({
   id: '/colleges/$slug',
   path: '/colleges/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProgramsIndexRoute = ProgramsIndexRouteImport.update({
@@ -57,18 +81,26 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/research': typeof ResearchRoute
+  '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges/': typeof CollegesIndexRoute
+  '/news/': typeof NewsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/research': typeof ResearchRoute
+  '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges': typeof CollegesIndexRoute
+  '/news': typeof NewsIndexRoute
   '/programs': typeof ProgramsIndexRoute
 }
 export interface FileRoutesById {
@@ -76,9 +108,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/research': typeof ResearchRoute
+  '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/programs/$slug': typeof ProgramsSlugRoute
   '/colleges/': typeof CollegesIndexRoute
+  '/news/': typeof NewsIndexRoute
   '/programs/': typeof ProgramsIndexRoute
 }
 export interface FileRouteTypes {
@@ -87,27 +123,39 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admission'
+    | '/research'
+    | '/student-life'
     | '/colleges/$slug'
+    | '/news/$slug'
     | '/programs/$slug'
     | '/colleges/'
+    | '/news/'
     | '/programs/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/admission'
+    | '/research'
+    | '/student-life'
     | '/colleges/$slug'
+    | '/news/$slug'
     | '/programs/$slug'
     | '/colleges'
+    | '/news'
     | '/programs'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/admission'
+    | '/research'
+    | '/student-life'
     | '/colleges/$slug'
+    | '/news/$slug'
     | '/programs/$slug'
     | '/colleges/'
+    | '/news/'
     | '/programs/'
   fileRoutesById: FileRoutesById
 }
@@ -115,9 +163,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdmissionRoute: typeof AdmissionRoute
+  ResearchRoute: typeof ResearchRoute
+  StudentLifeRoute: typeof StudentLifeRoute
   CollegesSlugRoute: typeof CollegesSlugRoute
+  NewsSlugRoute: typeof NewsSlugRoute
   ProgramsSlugRoute: typeof ProgramsSlugRoute
   CollegesIndexRoute: typeof CollegesIndexRoute
+  NewsIndexRoute: typeof NewsIndexRoute
   ProgramsIndexRoute: typeof ProgramsIndexRoute
 }
 
@@ -144,6 +196,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdmissionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/research': {
+      id: '/research'
+      path: '/research'
+      fullPath: '/research'
+      preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/student-life': {
+      id: '/student-life'
+      path: '/student-life'
+      fullPath: '/student-life'
+      preLoaderRoute: typeof StudentLifeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/colleges/': {
       id: '/colleges/'
       path: '/colleges'
@@ -156,6 +222,20 @@ declare module '@tanstack/react-router' {
       path: '/colleges/$slug'
       fullPath: '/colleges/$slug'
       preLoaderRoute: typeof CollegesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/programs/': {
@@ -179,9 +259,13 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdmissionRoute: AdmissionRoute,
+  ResearchRoute: ResearchRoute,
+  StudentLifeRoute: StudentLifeRoute,
   CollegesSlugRoute: CollegesSlugRoute,
+  NewsSlugRoute: NewsSlugRoute,
   ProgramsSlugRoute: ProgramsSlugRoute,
   CollegesIndexRoute: CollegesIndexRoute,
+  NewsIndexRoute: NewsIndexRoute,
   ProgramsIndexRoute: ProgramsIndexRoute,
 }
 export const routeTree = rootRouteImport
