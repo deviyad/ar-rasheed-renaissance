@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdmissionRouteImport } from './routes/admission'
+import { Route as AnnouncementsRouteImport } from './routes/announcements'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as StudentLifeRouteImport } from './routes/student-life'
 import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
@@ -34,6 +36,16 @@ const AboutRoute = AboutRouteImport.update({
 const AdmissionRoute = AdmissionRouteImport.update({
   id: '/admission',
   path: '/admission',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnnouncementsRoute = AnnouncementsRouteImport.update({
+  id: '/announcements',
+  path: '/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResearchRoute = ResearchRouteImport.update({
@@ -81,6 +93,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
@@ -94,6 +108,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
@@ -108,6 +124,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
+  '/announcements': typeof AnnouncementsRoute
+  '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
@@ -123,6 +141,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admission'
+    | '/announcements'
+    | '/events'
     | '/research'
     | '/student-life'
     | '/colleges/$slug'
@@ -136,6 +156,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admission'
+    | '/announcements'
+    | '/events'
     | '/research'
     | '/student-life'
     | '/colleges/$slug'
@@ -149,6 +171,8 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admission'
+    | '/announcements'
+    | '/events'
     | '/research'
     | '/student-life'
     | '/colleges/$slug'
@@ -163,6 +187,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdmissionRoute: typeof AdmissionRoute
+  AnnouncementsRoute: typeof AnnouncementsRoute
+  EventsRoute: typeof EventsRoute
   ResearchRoute: typeof ResearchRoute
   StudentLifeRoute: typeof StudentLifeRoute
   CollegesSlugRoute: typeof CollegesSlugRoute
@@ -194,6 +220,20 @@ declare module '@tanstack/react-router' {
       path: '/admission'
       fullPath: '/admission'
       preLoaderRoute: typeof AdmissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/announcements': {
+      id: '/announcements'
+      path: '/announcements'
+      fullPath: '/announcements'
+      preLoaderRoute: typeof AnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -259,6 +299,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdmissionRoute: AdmissionRoute,
+  AnnouncementsRoute: AnnouncementsRoute,
+  EventsRoute: EventsRoute,
   ResearchRoute: ResearchRoute,
   StudentLifeRoute: StudentLifeRoute,
   CollegesSlugRoute: CollegesSlugRoute,
