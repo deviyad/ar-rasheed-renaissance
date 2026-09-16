@@ -15,6 +15,7 @@ import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as AnnouncementsRouteImport } from './routes/announcements'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as ResearchRouteImport } from './routes/research'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as StudentLifeRouteImport } from './routes/student-life'
 import { Route as CollegesIndexRouteImport } from './routes/colleges.index'
 import { Route as CollegesSlugRouteImport } from './routes/colleges.$slug'
@@ -51,6 +52,11 @@ const EventsRoute = EventsRouteImport.update({
 const ResearchRoute = ResearchRouteImport.update({
   id: '/research',
   path: '/research',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudentLifeRoute = StudentLifeRouteImport.update({
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/announcements': typeof AnnouncementsRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
+  '/search': typeof SearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -111,6 +118,7 @@ export interface FileRoutesByTo {
   '/announcements': typeof AnnouncementsRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
+  '/search': typeof SearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -127,6 +135,7 @@ export interface FileRoutesById {
   '/announcements': typeof AnnouncementsRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
+  '/search': typeof SearchRoute
   '/student-life': typeof StudentLifeRoute
   '/colleges/$slug': typeof CollegesSlugRoute
   '/news/$slug': typeof NewsSlugRoute
@@ -144,6 +153,7 @@ export interface FileRouteTypes {
     | '/announcements'
     | '/events'
     | '/research'
+    | '/search'
     | '/student-life'
     | '/colleges/$slug'
     | '/news/$slug'
@@ -159,6 +169,7 @@ export interface FileRouteTypes {
     | '/announcements'
     | '/events'
     | '/research'
+    | '/search'
     | '/student-life'
     | '/colleges/$slug'
     | '/news/$slug'
@@ -174,6 +185,7 @@ export interface FileRouteTypes {
     | '/announcements'
     | '/events'
     | '/research'
+    | '/search'
     | '/student-life'
     | '/colleges/$slug'
     | '/news/$slug'
@@ -190,6 +202,7 @@ export interface RootRouteChildren {
   AnnouncementsRoute: typeof AnnouncementsRoute
   EventsRoute: typeof EventsRoute
   ResearchRoute: typeof ResearchRoute
+  SearchRoute: typeof SearchRoute
   StudentLifeRoute: typeof StudentLifeRoute
   CollegesSlugRoute: typeof CollegesSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
@@ -241,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/research'
       fullPath: '/research'
       preLoaderRoute: typeof ResearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/student-life': {
@@ -302,6 +322,7 @@ const rootRouteChildren: RootRouteChildren = {
   AnnouncementsRoute: AnnouncementsRoute,
   EventsRoute: EventsRoute,
   ResearchRoute: ResearchRoute,
+  SearchRoute: SearchRoute,
   StudentLifeRoute: StudentLifeRoute,
   CollegesSlugRoute: CollegesSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
