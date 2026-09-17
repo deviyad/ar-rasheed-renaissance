@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as AnnouncementsRouteImport } from './routes/announcements'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as SearchRouteImport } from './routes/search'
@@ -42,6 +43,11 @@ const AdmissionRoute = AdmissionRouteImport.update({
 const AnnouncementsRoute = AnnouncementsRouteImport.update({
   id: '/announcements',
   path: '/announcements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -100,6 +106,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/announcements': typeof AnnouncementsRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/search': typeof SearchRoute
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/announcements': typeof AnnouncementsRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/search': typeof SearchRoute
@@ -133,6 +141,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admission': typeof AdmissionRoute
   '/announcements': typeof AnnouncementsRoute
+  '/contact': typeof ContactRoute
   '/events': typeof EventsRoute
   '/research': typeof ResearchRoute
   '/search': typeof SearchRoute
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/announcements'
+    | '/contact'
     | '/events'
     | '/research'
     | '/search'
@@ -167,6 +177,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/announcements'
+    | '/contact'
     | '/events'
     | '/research'
     | '/search'
@@ -183,6 +194,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/admission'
     | '/announcements'
+    | '/contact'
     | '/events'
     | '/research'
     | '/search'
@@ -200,6 +212,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdmissionRoute: typeof AdmissionRoute
   AnnouncementsRoute: typeof AnnouncementsRoute
+  ContactRoute: typeof ContactRoute
   EventsRoute: typeof EventsRoute
   ResearchRoute: typeof ResearchRoute
   SearchRoute: typeof SearchRoute
@@ -240,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/announcements'
       fullPath: '/announcements'
       preLoaderRoute: typeof AnnouncementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -320,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdmissionRoute: AdmissionRoute,
   AnnouncementsRoute: AnnouncementsRoute,
+  ContactRoute: ContactRoute,
   EventsRoute: EventsRoute,
   ResearchRoute: ResearchRoute,
   SearchRoute: SearchRoute,

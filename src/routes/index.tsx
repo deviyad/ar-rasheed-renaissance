@@ -60,7 +60,7 @@ const icons: Record<string, LucideIcon> = {
 
 function HomePage() {
   const { pick, t, locale } = useI18n();
-  const featured = news.find((n) => n.featured) ?? news[0];
+  const featured = (news.find((n) => n.featured) ?? news[0])!;
   const rest = news.filter((n) => n.slug !== featured.slug).slice(0, 4);
 
   return (
