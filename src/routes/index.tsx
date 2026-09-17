@@ -25,6 +25,7 @@ import {
   ProgramRow,
   StatCard,
 } from "@/components/site/cards";
+import { ProgramShowcase } from "@/components/site/program-showcase";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -210,6 +211,9 @@ function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* PROGRAM SHOWCASE — Coursera-style tabbed cards */}
+      <ProgramShowcase />
 
       {/* PROGRAM EXPLORER TEASER */}
       <section className="py-16 md:py-24">

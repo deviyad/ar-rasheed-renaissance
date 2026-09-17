@@ -15,6 +15,7 @@ import { I18nProvider, useI18n } from "@/lib/i18n";
 import { ThemeProvider } from "@/lib/theme";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
+import { BackToTop } from "@/components/site/back-to-top";
 
 function NotFoundComponent() {
   return (
@@ -147,6 +148,7 @@ function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }
